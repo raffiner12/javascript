@@ -9,11 +9,32 @@
 <body>
     <script type="text/javascript">
         function get_argument(arg){
-            return arg;
+            return arg + 1000;
         }
 
         alert(get_argument(1));
         alert(get_argument(2));
+
+        
+        // 함수 정의 다른 방법 1.
+        numbering = function(){
+            i = 0;
+            while(i < 10) {
+                document.write(i);
+                i += 1;
+            }
+        } // = function numberint(){ ... }
+        numbering();
+
+
+        // 함수 정의 방법 2 : 익명 함수 (1회성 호출 시 사용)
+        (function(){
+            i = 0;
+            while(i < 10) {
+                document.write(i);
+                i += 1;
+            }
+        })(); // 정의된 함수를 괄호로 묶고 호출 기호 (); 해주면 익명함수가 됨.
     </script>
 </body>
 </html>
