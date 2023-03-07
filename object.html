@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <script>
+            var grades = {'egoing': 10, 'k8805': 6, 'sorialgi': 80};
+
+            // key 값 검색 방법 (색인)
+            alert(grades['sorialgi']);
+            alert(grades.sorialgi);
+
+            // document.write(grades.egoing);
+
+            // 반복문
+            for(key in grades) {
+                document.write("<li>key : " + key + " value : " + grades[key] + "</li>");
+            }
+            document.write("------------------<br />");
+
+
+
+            // 객체 지향 프로그래밍
+            var fruits = {
+                'list' : {'apple': 1000, 'banana': 2000, 'strawberry': 3000},
+                'show' : function(){
+                    for(var name in this.list){
+                        console.log(name, this.list[name]);
+                    }
+                    // console.log(this.list);
+                }
+            }
+            document.write(fruits['list']+"<br/>"); // list의 객체를 가르킴.
+            document.write(fruits['list']['strawberry']);
+            fruits['show']();
+
+            // --------------
+
+            var beverage = {
+                'list' : {'coffee': 1000, 'tea': 2000, 'milk': 3000},
+                'show' : function(){
+                    for(var name in this.list){
+                        console.log(name, this.list[name]);
+                    }
+                }
+            }
+            beverage.show();
+        </script>
+    </ul>
+</body>
+</html>
