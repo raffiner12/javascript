@@ -16,7 +16,7 @@
 
         // document.write(members[0].toUpperCase() + "<br />  ");
         // document.write(members[1]);
-        // document.write(members[2]);
+        // document.write(members[2]); 
 
         document.write(members.length + "<br />");
 
@@ -28,14 +28,18 @@
         // --------------------------------------------------------
         
         // 추가
-        members.push('d'); // 배열에 하나 추가
+        members.push('d'); // 배열에 하나 추가 // array를 stack 처럼 쓴다.
+
+        // 값만 넘겨주는 함수.
+        // 리턴 해준 것. 리턴 안하면  a 값이 안변함. 새로운 메모리가 필요해서 위의 것들과 다름. 레퍼런스로 갖고오는것.
         members = members.concat(['f','g']); // 둘 이상 배열에 추가
+
         members.unshift('kim');
         members.splice('1','1','x','y'); // 1지점에서 1개의 요소 삭제하고 x,y로 교체
         
         // 삭제
         members.shift(); // 첫 번째 값 삭제
-        members.pop(); //마지막 값 삭제
+        members.pop(); //마지막 값 삭제. // array를 stack 처럼 쓴다.
 
         // 정렬
         members.sort(); // 알파벳순 정렬
@@ -49,7 +53,7 @@
         for(var i = 0; i < members.length; i++){
             document.write(members[i].toUpperCase() + "<br /> ");
         }
-
+ 
         // 배열 for-in 문
         var arr = ['a', 'b', 'c'];
         for(var name in arr){

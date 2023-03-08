@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var vscope = 'global'; // 전역 변수
+        function fscope(){
+            vscope = 'local'; // 지역 변수 ( 함수 안에서만 가능)
+            alert(vscope); // 제일 가까운 바로위의 vscope을 찾는다. -> local이 경고창에 뜸
+        }
+        fscope();
+        alert(vscope);
+    </script>
+</body>
+</html>
