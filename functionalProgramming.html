@@ -10,11 +10,214 @@
     <script>
         var vscope = 'global'; // 전역 변수
         function fscope(){
-            vscope = 'local'; // 지역 변수 ( 함수 안에서만 가능)
+            var vscope = 'local'; // 지역 변수 ( 함수 안에서 선언되어 함수 안에서만 사용 가능)
             alert(vscope); // 제일 가까운 바로위의 vscope을 찾는다. -> local이 경고창에 뜸
         }
         fscope();
-        alert(vscope);
+        alert(vscope);  // -> global (전역 변수를  호출)
+                        // 지역 변수의 var을 삭제하면 
+                        // 전역 변수를 수정한 것이기 때문에 호출하면 local이 뜬다.  
+
+        
+    // -------------------------------------------------------------
+
+            // 전역 변수 사용하는 법
+            var MYAPP = {} // 전역변수 하나 생성
+            
+            MYAPP.calculator = { //필요한 전역변수(calculator)를 MYAPP에 담아 만듦.
+                'left' : null,   // 다른 전역변수들은 그 전역변수에 소속이 되면 변수의 이름이 충돌할 확률 줄어듦.
+                'right' : null
+            }
+            MYAPP.coordinate = {
+                'left' : null,
+                'right' : null
+            }
+
+            MYAPP.calculator.left = 10;
+            MYAPP.calculator.right = 20;
+            function sum(){
+                return MYAPP.calculator.left + MYAPP.calculator.right;
+            }
+            document.write(sum()); 
+
+
+            // 전역 변수를 쓰고 싶지 않을 때
+            (function(){
+                var MYAPP = {} // 지역변수 
+                
+                MYAPP.calculator = { 
+                    'left' : null,   
+                    'right' : null
+                }
+                MYAPP.coordinate = {
+                    'left' : null,
+                    'right' : null
+                }
+
+                MYAPP.calculator.left = 10;
+                MYAPP.calculator.right = 20;
+                function sum(){
+                    return MYAPP.calculator.left + MYAPP.calculator.right;
+                }
+                document.write(sum()); 
+            }()) // 함수 정의 후 바로 호출 (익명함수)   
+
+
+     // -------------------------------------------------------------
+
+
+            // 자바스크립트의 유효범위
+            for(var i = 0; i < 1; i++){
+                var name = 'coding everyday'; //
+            }
+            alert(name); // for문의 유효범위를 벗어나도 실행 가능함 (자바는 불가능)
+            // 자바스크립트에서는 함수의 중괄호 안에서만 선언된 변수만이 지역변수가 되고, 
+            // for문, if문 등의 선언된 변수는 지역변수 의미 X
+
+        
+     //-------------------------------------------------------------
+
+
+        // 정적 유효범위
+        //  : 사용될 때가 아닌 정의될 때의 전역 변수가 사용되는 것.
+        var i = 5;
+
+        function a(){
+            var i = 10;
+            b(); // 함수 b가 호출될 떄 함수 a에 선언된 i가 사용되는 것이 아니라 전역변수의 5가 사용됨. 
+        }
+
+        function b(){
+            document.writer(i); // i는 5일까, 10일까?
+        }
+        a();
+        
+
+    //-------------------------------------------------------------
+
+
+
+        // 값으로서의 함수
+        //  JavaScript에서는 함수도 객체다. 즉 일종의 값이다.
+        // JavaScsript의 함수가 다른 언어의 함수와 다른 점은 함수가 값이 될 수 있다는 점.
+
+        function a(){}
+
+        a = {
+            b:function(){}  // key : value -> 어떤 값(value)을 저장하고 있기 때문에 key가 변수역할도 하고 있음. 
+                            // -> 객체 안에서 변수역할을 하고 있는 것을 속성(property)라고 함.
+                            // -> 속성의 값은 함수인데 메소드라고도 부른다. (객체 안에 정의되어 있는 함수)
+        }
+            
+
+        // 함수는 값이기 때문에 다른 함수의 인자로 전달될 수 있다.
+        function cal(func, num){
+            return func(num);
+        }
+        function increase(num){
+            return num + 1
+        }
+        alert(cal(increase, 1));
+        // -> function cal(func,num){
+        //        var func = increase(num){
+        //            return num+1
+        //        }
+        //    } 이것과 같기 때문에 
+        //    func(1)
+        //    ->  return 값은 2
+
+
+
+        // 리턴의 값으로 함수 사용 가능
+        function cal(mode){
+            var funcs = {
+                'plus' : function(left, right){return left + right},
+                'minus' : function(left, right){return left - right}
+            }
+            return funcs[mode];
+        }
+        alert(cal('plus')(2,1));
+        // cal[plus](2,1) -> ()가 있으니 함수 호출된 것. -> 2 + 1 = 3
+
+        
+
+        // 배열의 값으로 함수 사용
+        var process = [ // 배열 정의
+            function(input){return input + 10;}, // i의 값이 0일 때 -> 1 + 10
+            function(input){return input * input;}, // i의 값이 1일 때 -> 11x11
+            function(input){return input / 2;} // i의 값이 2일 때 -> 121 / 2
+        ];
+        var input = 1;
+        for(var i = 0; i < process.length; i++){ // 배열의 길이만큼 반복문 호출
+            input = process[i](input);
+        }
+        alert(input); // -> 60.5
+
+
+
+        // 함수가 수신하는 인자가 함수인 경우 콜백이라 한다.
+        var numbers = [20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+        var sortfunc = function(a, b){
+            return a - b;
+            //return b - a; //역순 
+        }
+        // numbers.sort(); // sort는 객체(numbers)에 속해있기 때문에 메소드라 한다.
+        console.log(numbers.sort(sortfunc)); // sort 메소드가 실행될 때 sortfunc 함수 호출하여 첫 번째와 두 번째 인자 비교
+        // sortfunc가 콜백 함수.
+
+        
+    // ------------------------------------------------
+         
+
+
+        // 클로저
+        //  : 외부함수가 더 이상 사용되지 않는 경우에도 내부함수가 외부함수에 접근할 수 있다.
+
+        function outter(){
+            var title = 'coding everyday';
+            return function(){ // 내부함수를 리턴함. 리턴한 것은 그 함수는 종료된 것.
+                alert(title);// 내부함수에서 외부함수에 접근 시도
+            }  
+        }
+        var inner = outter(); 
+        inner();
+
+
+        // 클로저 - private variable
+        function factory_movie(title){ // get_title과 set_title을 통해서만 접근할 수 있는 변수가 된다.
+
+            return { // return값으로 객체 속성이 두 개 있음. (내부 함수))
+                get_title : function (){
+                    return title;
+                },
+                set_title : function(_title){
+                    title = _title
+                }
+            }
+         }
+        matrix = factory_movie('Matrix');
+        HarryPotter = factory_movie('HarryPotter');
+        alert(matrix.get_title()); // Matrix
+        alert(HarryPotter.get_title());
+
+        matrix.set_title('매트릭스');
+        alert(matrix.get_title()); // 매트릭스
+        alert(HarryPotter.get_title());
+
+         
+        // 클로저 응용
+        var arr = []
+        for(var i = 0; i < 5; i++){
+            arr[i] = function(id){  // for문이 실행될 때마다 함수가 실행되는데, id라는 매개변수 값으로 i를 받아서 함수 내부로 전달.
+                return function (){ // 전달과 동시에 내부함수 return. return된 내부함수가 배열에 담기게 된다.
+                    return id;
+                }
+            }(i); // 외부함수의 매개변수로 인자값을 i로 줌.
+        }
+        for(var index in arr) {
+            console.log(arr[index]());
+        }
+
     </script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 자바스크립트에서 함수는 일종의 객체.
+        // 객체는 속성을 갖고 있음. 속성에 값이 저장되어있으면 property라고 함. 속성에 함수가 들어있다면 method 라고 부름.
+        function sum(arg1, arg2){
+            return arg1+arg2;
+        }
+        alert(sum(1,2));
+        alert(sum.apply(null, [1,2])); // apply 첫 번째 인자로 null값이 아닌 다른 것을 사용하기 위해 apply를 씀.
+    </script>
+</body>
+</html>
