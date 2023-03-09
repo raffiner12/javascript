@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var funcThis = null; // 전역변수
+
+        function Func(){
+            funcThis = this;    // var이 없기 때문에 전역변수를 가리킨다.
+                                // 생성자로 사용될 때는 this의 값이 생성될 객체를 가리킨다.
+                                // 함수로 호출되면 this의 값은 window를 가리킨다.
+        }
+        var o1 = Func(); // 일반 함수로 호출
+        if(funcThis === window){ // this가 window를 가리키니까 같다.
+            document.write('window </br>');
+        }
+
+        // 생성자 안에서의 this -> 생성자가 만든 객체
+        var o2 = new Func(); // new를 통해 호출했기 때문에 생성자로 호출. JS가 비어있는 객체를 만들어 그 객체가 생성자 안에서 this가 됨.
+                                // 생성자를 통해 만들어진 객체가 o2에 담김
+        if(funcThis === o2){
+            document.write('o2 </br>');
+        }
+
+        
+        
+        // apply / call
+        var o = {}
+        var p = {}
+        function func(){
+            switch(this){
+                case o:
+                    document.write('o<br />');
+                    break;
+                case p:
+                    document.write('p<br />');
+                    break;
+                case window: // 함수 호출 시
+                    document.write('window<br />');
+                    break;
+            }
+        }
+        func(); // this : window
+        func.apply(o); // this : o
+        func.apply(p); // this : p
+    </script>
+</body>
+</html>
