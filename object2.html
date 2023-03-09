@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // object.prototype.toString()
+        // 메소드(toString())가 prototype 소속이란 것은 
+        // new Object()를 실행시키는 순간에 어떠한 객체를 만들고, 그 객체는 prototype이라고 하는 특수한 프로퍼티에 저장되어있는 객체가 생성된다.
+        var o = new object();
+        console.log('o.toString()', o.toString());
+
+        var a = new Array(1,2,3);
+        console.log('a.toString()', a.toString());
+
+        object.prototype.contain = function(needle){
+            for(var name in this){
+                if(this[name] === needle){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // object에 메소드나 프로퍼티를 추가할 때는 신중해야한다. 공통의 로직에서 최소의 단위에서 해야한다. 모든 객체에 영향을 줄 수 있기 때문에.
+
+    </script>
+</body>
+</html>
