@@ -20,7 +20,7 @@
             this.name = name;
         }
         Programmer.prototype = new Person();        // Programmer 생성자가 가지고 있는 프로퍼티 중에 prototype이란 특수한 프로퍼티의 값으로 new Person 한 것. -> 객체 생성
-        Programmer.prototype.coding = function(){   //   ->  객체 생성 시 JS는 propertype이라는 속성을 생성자함수가 갖고있는지 확인함. 
+        Programmer.prototype.coding = function(){   //   ->  객체 생성 시 JS는 prototype이라는 속성을 생성자함수가 갖고있는지 확인함. 
             return "hello world";                   //       생성자 함수 안에 들어있는 객체와 똑같이 만들어 생성자의 결과로 return  
         }                                           //       name이라는 프로퍼티와 introduce라는 메소드를 갖기고 있는 객체가 prototype 안에 들어가있기 때문에 
                                                     //       new Person()을 통해 만든 객체는 name과 introduce를 갖고 있음.
@@ -52,7 +52,7 @@
         Ultra.prototype.ultraProp = true;
 
         function Super(){}
-        super.prototype = new Ultra(); // prototype은 new Ultra의 객체를 가리키는데, new Ultra의 객체는 Ultra의 prototype을 가리킨다 -> 이를 prototype chain이라 함.
+        Super.prototype = new Ultra(); // prototype은 new Ultra의 객체를 가리키는데, new Ultra의 객체는 Ultra의 prototype을 가리킨다 -> 이를 prototype chain이라 함.
 
         function Sub(){}
         Sub.prototype = new Super(); // Sub이란 함수는 객체이기 때문에 프로퍼티를 갖고있음. 그 중 prototype이란 특수한 프로퍼티가 있는데 그 안에 어떠한 객체가 들어가있다.그 객체를 꺼내 return 해줌.

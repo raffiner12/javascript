@@ -20,7 +20,7 @@
         console.log(getRandomValueFromArray(arr));
         */
         Array.prototype.random = function(){ // 배열 생성자를 통해 만들어진 객체가 random이란 메소드를 갖고 있음.
-            var index = Math.floor(this.length*Math.random()); // 배열 객체가 this
+            var index = Math.floor(this.length * Math.random()); // 배열 객체가 this
             return this[index];
         }
         var arr = new Array('seoul', 'new york', 'ladarkh', 'pusan');
